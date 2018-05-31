@@ -11,6 +11,8 @@
 #include<sys/stat.h>
 #include<fcntl.h>
 #include<sys/stat.h>
+#include<math.h> // ceil() 
+// 일단 지금 쓰는 헤더파일 다 해놓음.
 
 void split(char *path, char *filename, int n)
 {
@@ -27,20 +29,23 @@ void split(char *path, char *filename, int n)
 		exit(1);
 	}
 
-	stat(path, &status);
-
-	p_size = (size_t)(status.st_size/n); // n >0
+	stat(path, &status);	// 스탯 불러옴.
+	
+	p_size = (size_t)ceil(status.st_size/n); // n > 0, 전체 크기를 n 분할한 크기
 	fseek(source, 0, SEEK_END);
 	
-	parts = (size_t) ceil((double)ftell(source)/p_size);
-	// parts = n;
+	parts = (size_t) ceil((double)ftell(source)/p_size);	// 필요 없는 부분, parts = n; 이렇게 대체할 수 있음.
+	
+	// 아직 수정한거 테스트 안해봄.
+	
 	rewind(source);
+	
 
 	for(i=0; i<parts; i++) // split into 'parts' pieces.
 	{
 		printf("write parts %02d ...",i);
 		sprintf(p_name, "%s.%02d", filename, i);
-
+		
 		if((part = fopen(p_name, "wb")) == NULL)
 		{
 			perror("part file open error");
@@ -51,7 +56,8 @@ void split(char *path, char *filename, int n)
 		{
 			fputc(b, part);
 		}
-		/*
+		/* 
+		1바이트씩 읽고 있는데 4k 씩 읽도록 변경해야함. 아직 바꿔서 테스트 안해봄.
 		b = fread(buf, 4096, 1, source)
 		fwrite(buf, 4096, 1, part)
 		change.
