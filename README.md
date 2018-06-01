@@ -1,21 +1,40 @@
-ê°€ìž¥ ë¹ ë¥¸ ì „ì†¡ íš¨ìœ¨ì„ ë³´ì´ëŠ” FTP ì„œë²„ êµ¬í˜„ í”„ë¡œì íŠ¸ìž…ë‹ˆë‹¤.
-
-í”„ë¡œì íŠ¸ ê¸°ê°„ 5/18 ~ 6/08
-
-êµ¬í˜„ : tcp ì „ì†¡ì„ í†µí•œ ftpì„œë²„
-  â—ê³ ë ¤ì‚¬í•­
-â‘  buffer í¬ê¸°
-â‘¡ send / write 
-â‘¢ ì €ìˆ˜ì¤€ íŒŒì¼ìž…ì¶œë ¥
-â‘£ ê³ ìˆ˜ì¤€ íŒŒì¼ìž…ì¶œë ¥
+°¡Àå ºü¸¥ Àü¼Û È¿À²À» º¸ÀÌ´Â FTP ¼­¹ö ±¸Çö ÇÁ·ÎÁ§Æ®ÀÔ´Ï´Ù.
 
 
-ê¸°ëŠ¥ 1 : preloading ì„ í†µí•œ ì†ë„ í–¥ìƒ
-  â—ê³ ë ¤ì‚¬í•­
-â‘  ë™ì í• ë‹¹ (linked listë¥¼ í†µí•œ ì—°ê²°)ì„ í†µí•œ cache í• ë‹¹
-â‘¡ read ë¥¼ í†µí•œ cache í• ë‹¹
 
-ê¸°ëŠ¥ 2 + ê¸°ëŠ¥ 3 : splitì„ í†µí•œ íŒŒì¼ ë¶„í•  + íŒŒì¼ ì••ì¶•
-  â—ê³ ë ¤ì‚¬í•­
-â‘  ì“°ë ˆë“œë¥¼ ì´ìš©í•œ íŒŒì¼ ë¶„í• 
-â‘¡ íŒŒì¼ í™•ìž¥ìžë¥¼ í™•ì¸í•œ í›„ ì••ì¶•
+ÇÁ·ÎÁ§Æ® ±â°£ 5/18 ~ 6/08
+
+
+
+±¸Çö : tcp Àü¼ÛÀ» ÅëÇÑ ftp¼­¹ö
+  
+     ¡Ü°í·Á»çÇ×
+
+ ¨ç buffer Å©±â
+
+ ¨è send / write 
+
+ ¨é Àú¼öÁØ ÆÄÀÏÀÔÃâ·Â
+
+ ¨ê °í¼öÁØ ÆÄÀÏÀÔÃâ·Â
+
+
+±â´É 
+
+±â´É 1 : preloading À» ÅëÇÑ ¼Óµµ Çâ»ó
+  
+     ¡Ü°í·Á»çÇ×
+
+ ¨ç µ¿ÀûÇÒ´ç (linked list¸¦ ÅëÇÑ ¿¬°á)À» ÅëÇÑ cache ÇÒ´ç
+
+ ¨è read ¸¦ ÅëÇÑ cache ÇÒ´ç
+
+
+
+±â´É 2 + ±â´É 3 : splitÀ» ÅëÇÑ ÆÄÀÏ ºÐÇÒ + ÆÄÀÏ ¾ÐÃà
+  
+     ¡Ü°í·Á»çÇ×
+
+ ¨ç ¾²·¹µå¸¦ ÀÌ¿ëÇÑ ÆÄÀÏ ºÐÇÒ
+
+ ¨è ÆÄÀÏ È®ÀåÀÚ¸¦ È®ÀÎÇÑ ÈÄ ¾ÐÃà
