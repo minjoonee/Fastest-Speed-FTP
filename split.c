@@ -11,21 +11,20 @@
 #include<sys/stat.h>
 #include<fcntl.h>
 #include<sys/stat.h>
-#include<math.h>
-
-void split(char *path, char *filename, int n);
+void Split(char *path, char *filename, int n);
 int main(int argc, char* argv[]){
-    split(argv[1],argv[2],4);
+    Split(argv[1],argv[2],4);
     return 0;
 }
 
-void split(char *path, char *filename, int n)
+void Split(char *path, char *filename, int n)
 {
     char p_name[100];
     FILE *source, *part;
     size_t parts;
     int i;
     int p_size, w_b, b;
+    double temp;
     struct stat status;
 
     if((source = fopen(path, "rb")) == NULL)
@@ -35,14 +34,18 @@ void split(char *path, char *filename, int n)
     }
 
     stat(path, &status);
-    p_size = (size_t)ceil(status.st_size/n);
+    p_size = (size_t)(status.st_size/n);
+    temp = status.st_size/(double)n;
+    printf("%d vs %lf\n",p_size,temp);
+    if(temp-(double)p_size>0) p_size=p_size+1;
+    printf("%d\n",p_size);
     fseek(source, 0, SEEK_END);
     parts = n;
     rewind(source);
 
     for(i=0; i<parts; i++) // split into 'parts' pieces.
     {
-        printf("write parts %02d ...",i);
+        printf("write parts %02d ...\n",i);
         sprintf(p_name, "%s.%02d", filename, i);
         if((part = fopen(p_name, "wb")) == NULL)
         {
