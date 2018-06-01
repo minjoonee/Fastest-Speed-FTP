@@ -1,4 +1,16 @@
-#include "project.h"
+#include<stdio.h>
+#include<stdlib.h>
+#include<sys/types.h>
+#include<netinet/in.h>
+#include<inttypes.h>
+#include<sys/socket.h>
+#include<arpa/inet.h>
+#include<string.h>
+#include<unistd.h>
+#include<dirent.h>
+#include<sys/stat.h>
+#include<fcntl.h>
+#define BUF 4096
 
 int main(int argc, char* argv[]){
     //argv[1] is PORTNUM
@@ -47,21 +59,21 @@ int main(int argc, char* argv[]){
                     perror("recv\n");
                     exit(1);
                 }
-            sprintf(path, "%s/%s", argv[2], cli_file);
-            rfd = open(path, O_RDONLY);
-            if(rfd == -1){
-                perror("not open file");
-                exit(1);
-            }
-            while((n = read(rfd, buf, BUFSIZ))>0){
-                if(write(ns, buf, n)!=n){
-                    perror("not write file");
+                sprintf(path, "%s/%s", argv[2], cli_file);
+                rfd = open(path, O_RDONLY);
+                if(rfd == -1){
+                    perror("not open file");
                     exit(1);
+                }
+                while((n = read(rfd, buf, BUFSIZ))>0){
+                    if(write(ns, buf, n)!=n){
+                        perror("not write file");
+                        exit(1);
+                    }
                 }
                 printf("transport success '%s' file. \n",cli_file);
                 close(rfd);
-            }
-            exit(0);
+                exit(0);
         }
         close(ns);
     }
