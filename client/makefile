@@ -1,2 +1,2 @@
-main : project_cli.c
-	gcc -o project_cli project_cli.c
+main : zip_cli.c
+	gcc -o client zip_cli.c
